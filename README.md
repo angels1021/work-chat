@@ -12,7 +12,7 @@ A chat application for helping employees run through common request
 
 1. Clone the repository:
    ```sh
-   git clone <https://github.com/angels1021/work-chat>
+   git clone https://github.com/angels1021/work-chat
    ```
 2. Navigate to the project directory:
    ```sh

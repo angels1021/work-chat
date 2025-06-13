@@ -1,9 +1,6 @@
 import onboardingChat from './mocks/onboarding.json';
 import accessChat from './mocks/access.json';
 import featureChat from './mocks/feature.json';
-// import featureChat from './mocks/feature';
-// import accessChat from './mocks/access';
-// import onboardingChat from './mocks/onboarding';
 
 
 import { type Chat,type ChatTopic } from './chats.types';
