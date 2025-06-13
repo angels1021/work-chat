@@ -1,5 +1,4 @@
-import { useEffect, useRef } from 'react';
-import { type Message, type MessageType, type InputType, MESSAGE_TYPES } from '../../api';
+import { type Message, type MessageType, type InputType, MESSAGE_TYPES } from '@api';
 import { Greeting } from '@components';
 import { MessageInput } from './MessageInput';
 import { MessageAction } from './MessageAction';
@@ -7,7 +6,8 @@ import { MessageAction } from './MessageAction';
 const components = {
     [MESSAGE_TYPES.input]: MessageInput,
     [MESSAGE_TYPES.action]: MessageAction,
-    [MESSAGE_TYPES.text]: (props: any) => null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [MESSAGE_TYPES.text]: (_props: any) => null,
 }
 
 interface Props {

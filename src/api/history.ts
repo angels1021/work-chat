@@ -5,15 +5,17 @@ import { getChatById } from './chats';
 import { getCurrentUser } from './auth';
 import type { ChatHistory, ChatHistoryState, FullChatHistory } from './history.types';
 
-export const getHistory = (): ChatHistory[] => {
+export const getHistory = (): ChatHistory[] => historyStorage.get();
+
+export const getUserHistory = (): ChatHistory[] => {
     const userId = getCurrentUser()?.id;
     if (!userId) return [];
-    const history: ChatHistory[] = historyStorage.get() ?? [];
+    const history: ChatHistory[] = getHistory() ?? [];
     return history.filter(h => h.userId === userId);
 }
 
 export const getRecentHistory = (): ChatHistory[] => {
-    return getHistory().sort((a, b) => new Date(b.started).getTime() - new Date(a.started).getTime());
+    return getUserHistory().sort((a, b) => new Date(b.started).getTime() - new Date(a.started).getTime());
 }
 
 export const saveHistory = (history: ChatHistoryState) => {

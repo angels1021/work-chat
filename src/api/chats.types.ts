@@ -66,19 +66,19 @@ type Validation<T extends InputType> = {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
-} : {});
+} : unknown);
 
 type InputMessage <T extends InputType> = {
   inputType: T;
   validation: Validation<T>;
 } & (T extends 'select' ? {
   options: string[];
-} : {});
+} : unknown);
 
 type InputVerify<T extends InputType | undefined> = (
   T extends InputType ?
   InputMessage<T> :
-  {});
+  unknown);
 
 export type Message<T extends MessageType, I extends InputType | undefined = undefined> = {
   id: string;
@@ -86,7 +86,7 @@ export type Message<T extends MessageType, I extends InputType | undefined = und
   content: string;
   continue?: boolean;
   inputType?: I;
-} & (T extends 'action' ? { actions: Action[] } : T extends 'input' ? InputVerify<I> : {});
+} & (T extends 'action' ? { actions: Action[] } : T extends 'input' ? InputVerify<I> : unknown);
 
 export interface Chat {
   id: string;
@@ -103,5 +103,5 @@ export interface ChatTopic {
 
 // guards
 export const isTextMessage = (message: Message<MessageType, InputType | undefined>): message is Message<'input', 'text'> => message.type === MESSAGE_TYPES.input && message?.inputType === INPUT_TYPES.text;
-export const isSelectMessage = (message: Message<MessageType, InputType | undefined>): message is Message<'input', 'select'> => message.type === MESSAGE_TYPES.input && message?.inputType === INPUT_TYPES.select;
-export const isDateMessage = (message: Message<MessageType, InputType | undefined>): message is Message<'input', 'date'> => message.type === MESSAGE_TYPES.input && message?.inputType === INPUT_TYPES.date;
+export const isSelectMessage = (message: Message<MessageType, InputType | undefined>): message is Message<'input', 'select'> => message.type === MESSAGE_TYPES.input && message?.inputType === 'select';
+export const isDateMessage = (message: Message<MessageType, InputType | undefined>): message is Message<'input', 'date'> => message.type === MESSAGE_TYPES.input && message?.inputType === 'date';

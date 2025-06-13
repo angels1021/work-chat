@@ -19,7 +19,7 @@ export type ChatHistory = {
 export type ChatHistoryState = Omit<ChatHistory, 'id' | 'userId'>;
 
 export type MessageWithResponse<T extends MessageType, I extends InputType | undefined> = Message<T, I> & {
-    response?: T extends 'input' ? I extends InputType ? Response<I>['response'] : {} : {};
+    response?: T extends 'input' ? I extends InputType ? Response<I>['response'] : unknown : unknown;
 };
 
 export type ChatWithResponses = Omit<Chat, 'messages'> & {

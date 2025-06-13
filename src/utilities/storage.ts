@@ -5,7 +5,7 @@ class StorageAccessor {
   
     get = () => JSON.parse(localStorage.getItem(this.key) ?? 'null');
   
-    set = (val: any) => localStorage.setItem(this.key, JSON.stringify(val));
+    set = (val: unknown) => localStorage.setItem(this.key, JSON.stringify(val));
   
     remove = () => localStorage.removeItem(this.key);
 }

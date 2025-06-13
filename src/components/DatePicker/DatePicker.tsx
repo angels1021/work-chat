@@ -7,13 +7,11 @@ import './datePicker.css';
 
 interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'min' | 'max' | 'value' | 'onChange'> {
     value: Date | null;
-    onChange: (inputValue: string, date?: Date | null) => any;
+    onChange: (inputValue: string, date?: Date | null) => void;
     className?: string;
     min?: Date;
     max?: Date;
 }
-
-const DATE_PATTERN = /^\d{4}\/\d{2}\/\d{2}$/;
 
 export const DatePicker = ({ value, onChange, className, min, max, ...props }: DatePickerProps) => {
     const [inputValue, setInputValue] = useState(value ? inputStringFromDate(value) : '');

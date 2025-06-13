@@ -1,12 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { createBrowserRouter, RouterProvider, type RouteObject } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import { AuthProvider } from './auth';
 import './index.css';
-import { routes, queryClient as queryClientAlt } from './routes';
+import { APP_ROUTES, QUERY_CLIENT } from './routes';
 
-const routerBrowser = createBrowserRouter(routes as RouteObject[]);
+const routerBrowser = createBrowserRouter(APP_ROUTES);
 
 const container = document.getElementById('root')!;
 
@@ -23,7 +23,7 @@ if (!containerWithRoot._reactRoot) {
 
 containerWithRoot._reactRoot.render(
   <StrictMode>
-    <QueryClientProvider client={queryClientAlt}>
+    <QueryClientProvider client={QUERY_CLIENT}>
       <AuthProvider>
         <RouterProvider router={routerBrowser} />
       </AuthProvider>

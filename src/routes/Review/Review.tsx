@@ -1,37 +1,17 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useParams, data } from 'react-router';
-
 import { FaCheck } from 'react-icons/fa';
-import { getChatHistoryById, type MessageType, type MessageWithResponse, type InputType, type Message, isHistoryText, isHistorySelect, isHistoryDate } from "@api";
-import { formatDateForDisplay } from "@utilities";
-import { CheckboxButton, Button } from '@components';
 
-export const reviewQueryOptions = (historyId: string) =>
-    queryOptions({
-        queryKey: ['review', historyId],
-        queryFn: () => getChatHistoryById(historyId),
-    });
+import { type Message } from "@api";
+import { formatDateForDisplay } from "@utilities";
+import { Button } from '@components';
+import { reviewQueryOptions } from './loader';
+import { MessageResponse } from './MessageResponse';
+
 
 const Answer = ({ children }: { children: React.ReactNode }) => (
     <div className="p-4 bg-foreground rounded-xl">{children}</div>
 )
-
-const renderInput = (message: MessageWithResponse<MessageType, InputType>) => {
-    if (!message.inputType) return null;
-    if (!message.response) return <div className="opacity-50">No response</div>;
-    if (isHistoryText(message)) return <div dangerouslySetInnerHTML={{ __html: message.response }} />;
-    if (isHistorySelect(message)) return (
-        <div className="flex flex-wrap gap-4">
-            {message.options?.map((option: string) => (
-                <CheckboxButton key={option} sizing="fit" id={option} name="selection" value={option} checked={message?.response?.includes(option)} readOnly>
-                    {option}
-                </CheckboxButton>
-            ))}
-        </div>
-    );
-    if (isHistoryDate(message)) return <div>{formatDateForDisplay(message?.response)}</div>
-    return null;
-}
 
 export const Review = () => {
     const { historyId } = useParams();
@@ -54,7 +34,9 @@ export const Review = () => {
                         <div className="text-gray-400 mb-2">{message.content}</div>
                         <>
                             {message.response && message.type === 'input' ? (
-                                <Answer>{renderInput(message)}</Answer>
+                                <Answer>
+                                    <MessageResponse {...message} />
+                                </Answer>
                             ): null}
                             {message.type === 'action' ? (
                                 <Answer>

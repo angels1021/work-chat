@@ -1,22 +1,9 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useParams, data } from 'react-router';
 
-import { getChatById } from '@api';
-import { ChatProvider } from './context';
+import { ChatProvider } from './ChatProvider';
 import { ChatPlayer } from './ChatPlayer';
-
-
-export const chatQueryOptions = (chatId: string) =>
-    queryOptions({
-        queryKey: ['chat', chatId],
-        queryFn: async () => {
-            try {
-                return await getChatById(chatId);
-            } catch (error) {
-                throw new Error('Chat not found');
-            }
-        },
-    });
+import { chatQueryOptions } from './loader';
     
 export const Chat = () => {
     const { chatId } = useParams();

@@ -1,25 +1,23 @@
-import { Outlet, type RouteObject, redirect, Navigate } from 'react-router';
+import { Outlet, type RouteObject, Navigate } from 'react-router';
 import { QueryClient } from '@tanstack/react-query';
 import { Home } from './Home';
-import { Dashboard, dashboardQueryOptions } from './Dashboard/Dashboard';
+import { Dashboard, dashboardQueryOptions } from './Dashboard';
 import { Chat, chatQueryOptions, Error as ChatError } from './Chat';
 import { Review, reviewQueryOptions, Error as ReviewError } from './Review';
 import { Login } from './Login';
 import { Join } from './Join';
 import { AuthenticatedRoute } from './AuthenticatedRoute';
 
-export const queryClient = new QueryClient();
+export const QUERY_CLIENT = new QueryClient();
 
-const App = () => (
-    <div className="w-full h-full min-h-screen bg-cyan-600">
-        <Outlet />
-    </div>
-)
-
-export const routes: RouteObject[] = [
+export const APP_ROUTES: RouteObject[] = [
     {
         path: '/',
-        Component: App,
+        Component: () => (
+            <div className="w-full h-full min-h-screen bg-background">
+                <Outlet />
+            </div>
+        ),
         children: [
             {
                 path: '/login',
@@ -40,13 +38,13 @@ export const routes: RouteObject[] = [
                                 index: true,
                                 Component: Dashboard,
                                 loader: () => {
-                                    return queryClient.ensureQueryData(dashboardQueryOptions());
+                                    return QUERY_CLIENT.ensureQueryData(dashboardQueryOptions());
                                 },
                             },
                             {
                                 path: 'review/:historyId',
                                 loader: ({ params: { historyId } }) => {
-                                    return queryClient.ensureQueryData(reviewQueryOptions(historyId as string));
+                                    return QUERY_CLIENT.ensureQueryData(reviewQueryOptions(historyId as string));
                                 },
                                 Component: Review,
                                 ErrorBoundary: ReviewError
@@ -58,7 +56,7 @@ export const routes: RouteObject[] = [
                         path: '/chat/:chatId',
                         Component: Chat,
                         loader: ({ params: { chatId } }) => {
-                            return queryClient.ensureQueryData(chatQueryOptions(chatId as string));
+                            return QUERY_CLIENT.ensureQueryData(chatQueryOptions(chatId as string));
                         },
                         ErrorBoundary: ChatError
                     },

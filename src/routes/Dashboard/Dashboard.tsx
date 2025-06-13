@@ -1,13 +1,7 @@
 import { Link } from 'react-router';
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { getChatTopics } from '@api';
-
-export const dashboardQueryOptions = () =>
-    queryOptions({
-        queryKey: ['chatTopics'],
-        queryFn: () => getChatTopics(),
-    });
+import { dashboardQueryOptions } from './loader';
 
 export const Dashboard = () => {
     const { data: chatTopics } = useQuery(dashboardQueryOptions());
