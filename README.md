@@ -1,54 +1,134 @@
-# React + TypeScript + Vite
+# Work Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A chat application for helping employees run through common request
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v18 or higher recommended)
+- npm
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd work-chat
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+### Running the Development Server
+
+To start the development server, run:
+
+```sh
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Folder Structure
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+src/
+├── api/
+│   ├── mocks/
+│   │   ├── access.json
+│   │   ├── access.ts
+│   │   ├── feature.json
+│   │   ├── feature.ts
+│   │   ├── onboarding.json
+│   │   └── onboarding.ts
+│   ├── auth.ts
+│   ├── auth.types.ts
+│   ├── chats.ts
+│   ├── chats.types.ts
+│   ├── history.ts
+│   ├── history.types.ts
+│   └── index.ts
+├── assets/
+│   └── react.svg
+├── auth/
+│   ├── AuthProvider.tsx
+│   ├── context.tsx
+│   └── index.ts
+├── components/
+│   ├── DatePicker/
+│   │   ├── CalanderPicker.tsx
+│   │   ├── DatePicker.tsx
+│   │   ├── datePicker.css
+│   │   └── index.ts
+│   ├── Button.tsx
+│   ├── CheckboxButton.tsx
+│   ├── ErrorMessage.tsx
+│   ├── Failed.tsx
+│   ├── Greeting.tsx
+│   ├── Input.tsx
+│   ├── Modal.tsx
+│   ├── NavLink.tsx
+│   └── index.ts
+├── routes/
+│   ├── Chat/
+│   │   ├── MessageAction/
+│   │   │   ├── SummaryModal.tsx
+│   │   │   └── index.tsx
+│   │   ├── MessageInput/
+│   │   │   ├── InputDate.tsx
+│   │   │   ├── InputSelect.tsx
+│   │   │   ├── InputText.tsx
+│   │   │   └── index.tsx
+│   │   ├── Chat.tsx
+│   │   ├── ChatMessage.tsx
+│   │   ├── ChatPlayer.tsx
+│   │   ├── ChatProvider.tsx
+│   │   ├── Error.tsx
+│   │   ├── context.tsx
+│   │   ├── index.ts
+│   │   └── loader.ts
+│   ├── Dashboard/
+│   │   ├── Dashboard.tsx
+│   │   ├── index.ts
+│   │   └── loader.ts
+│   ├── Home/
+│   │   ├── HistoryList.tsx
+│   │   ├── Sidebar.tsx
+│   │   └── index.tsx
+│   ├── Review/
+│   │   ├── Error.tsx
+│   │   ├── MessageResponse.tsx
+│   │   ├── Review.tsx
+│   │   ├── index.ts
+│   │   └── loader.tsx
+│   ├── AuthenticatedRoute.tsx
+│   ├── Join.tsx
+│   ├── Login.tsx
+│   └── index.tsx
+├── utilities/
+│   ├── date.ts
+│   ├── global.ts
+│   ├── index.ts
+│   └── storage.ts
+├── index.css
+├── main.tsx
+└── vite-env.d.ts
+```
+
+## Built With
+
+*   [React](https://reactjs.org/) - The web framework used
+*   [Vite](https://vitejs.dev/) - Build tool
+*   [TypeScript](https://www.typescriptlang.org/) - Language
+*   [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
+*   [React Query](https://tanstack.com/query/latest) - Data fetching and state management
+*   [React Hook Form](https://react-hook-form.com/) - Form validation
+*   [React Router](https://reactrouter.com/) - Routing
+*   [React Icons](https://react-icons.github.io/react-icons/) - Icons
+*   [UUID](https://github.com/uuidjs/uuid) - For generating unique IDs
+*   [ESLint](https://eslint.org/) - Linter

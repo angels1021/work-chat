@@ -7,7 +7,8 @@
 
   2. chat enter:
    a. select type: 1. Onboarding, 2, Access request, 3. Feature Request
-   b. sidebar for history - chat view or summery, logout.
+   b. sidebar for history - chat view or summary, logout.
+   c. view for summary
   
   3. chat - ai interface:
    a. top - display questions and answers
@@ -28,3 +29,4 @@
   1. user
   2. message types
   3. chat types
+  4. history types
