@@ -1,0 +1,30 @@
+ 1. login:
+   a. fullname, email, password
+   b. join, login
+   c. save login to local storage
+   d. if login, redirect to home
+   e. if not login, redirect to login
+
+  2. chat enter:
+   a. select type: 1. Onboarding, 2, Access request, 3. Feature Request
+   b. sidebar for history - chat view or summery, logout.
+  
+  3. chat - ai interface:
+   a. top - display questions and answers
+   b. bottom - input field + send button
+  
+   persist data to local storage
+   - user details
+   - chat history
+  
+  services:
+  1. login service in/join/out
+  2. chat service load: predefine questions, save to storage
+  3. history service load from storage per user
+  4. user service storage: existing user, new user
+  5. storage service: create, read, update, delete
+  
+  types:
+  1. user
+  2. message types
+  3. chat types
