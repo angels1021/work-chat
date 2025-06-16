@@ -5,7 +5,7 @@ import { getChatById } from './chats';
 import { getCurrentUser } from './auth';
 import type { ChatHistory, ChatHistoryState, FullChatHistory } from './history.types';
 
-export const getHistory = (): ChatHistory[] => historyStorage.get();
+export const getHistory = (): ChatHistory[] => historyStorage.get() || [];
 
 export const getUserHistory = (): ChatHistory[] => {
     const userId = getCurrentUser()?.id;
