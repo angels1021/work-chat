@@ -1,4 +1,4 @@
-import { appUsersStorage, activeUserStorage } from '../utilities';
+import { appUsersStorage, activeUserStorage } from '@utilities';
 import { v4 as uuid } from 'uuid';
 import type { User, UserData, LoginForm, JoinForm } from './auth.types';
 
@@ -33,7 +33,11 @@ export const getCurrentUser = (): User | null => {
         return null;
     }
 }
+const setCurrentUser = (user: User) => {
+    activeUserStorage.set({ name: user.name, email: user.email, id: user.id });
+}
 
+// login
 export const loginUser = (user: LoginForm) => {
     const users = getAppUsers() ?? [];
     const existingUser = users.find(u => u.email === user.email);
@@ -43,10 +47,11 @@ export const loginUser = (user: LoginForm) => {
     if (existingUser.pw !== atob(user.pw)) {
         throw new Error(AUTH_ERRORS.invalidPassword);
     }
-    activeUserStorage.set({ name: existingUser.name, email: existingUser.email, id: existingUser.id });
+    setCurrentUser(existingUser);
     return existingUser;
 }
 
+// join
 export const AddUser = (user: JoinForm) => {
     const users = getAppUsers() ?? [];
     const existingUser = users.find(u => u.email === user.email);
@@ -54,9 +59,11 @@ export const AddUser = (user: JoinForm) => {
         throw new Error(AUTH_ERRORS.userAlreadyExists);
     }
 
-    users.push({ id: uuid(), name: user.name, email: user.email, pw: atob(user.pw) });
+    const newUser = { id: uuid(), name: user.name, email: user.email, pw: btoa(user.pw) };
+    users.push(newUser);
     appUsersStorage.set(users);
-    return loginUser({ email: user.email, pw: user.pw });
+    setCurrentUser(newUser);
+    return newUser;
 }
 
 export const logoutUser = () => {

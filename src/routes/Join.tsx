@@ -12,7 +12,7 @@ export const Join = () => {
     const { state } = useLocation();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<JoinForm>();
 
-    const onSubmit: SubmitHandler<JoinForm> = async ({ name, email, pw }) => {
+    const onSubmit: SubmitHandler<JoinForm> = ({ name, email, pw }) => {
         try {
             join({ name, email, pw });
             navigate(state?.from ?? '/');

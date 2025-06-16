@@ -12,7 +12,7 @@ export const Login = () => {
     
     const { register, handleSubmit, setError, formState: { errors } } = useForm<LoginForm>();
 
-    const onSubmit: SubmitHandler<LoginForm> = async ({ email, pw }) => {
+    const onSubmit: SubmitHandler<LoginForm> = ({ email, pw }) => {
         if (!email || !pw) {
             return;
         }
